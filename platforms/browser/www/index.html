@@ -24,7 +24,6 @@
             <img id="logo" src="./downloads/images/onYerBikeLogo.png"/>
         </div>
         <div id="dashboard">
-            <button disabled="true" class="nav" id="setDest">Set Destination</button>
             <button data-toggle="collapse"
                     data-target="#route"
                     class="nav"
@@ -33,7 +32,6 @@
                     data-target="#settings"
                     class="nav"
                     id="showAll">Settings</button>
-            <button disabled="true" class="nav" id="reset">Reset</button>
         </div>
         <div id="route" class="collapse">
             <div class="panel panel-default">
@@ -66,7 +64,7 @@
                             onclick="Create()">Create</button>
                     <button type="button"
                             class="btn btn-primary"
-                            onclick="Reset()">Reset</button>
+                            onclick="MapReset()">Reset</button>
                 </div>
             </div>
         </div>
@@ -77,8 +75,20 @@
                     <button type="button"
                             class="btn btn-primary"
                             onclick="DisplayStations()">Display All Stations</button>
+                    <button type="button" class="btn btn-primary"
+                            data-toggle="collapse"
+                            data-target="#security">Set Security</button>
+                    <div id="security" class="collapse">
+                        <button type="button"
+                                class="btn btn-primary"
+                                onclick="SetSecurityHigh()">High Security</button>
+                        <button type="button"
+                                class="btn btn-primary"
+                                onclick="SetSecurityLow()">Average Security</button>
+                    </div>
                     <button type="button"
-                            class="btn btn-primary">Reset</button>
+                            class="btn btn-primary"
+                            onclick="SettingsReset()">Reset</button>
                 </div>
             </div>
         </div>

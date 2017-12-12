@@ -1,15 +1,11 @@
 var map = L.map('map').setView([53.3498, -6.2603], 13);
 var route = [];
+var highSecurtiy = false;
 
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18
 }).addTo(map);
-
-
-
-
-
 
 function DisplayStations(){
     markerClusters = L.markerClusterGroup();
@@ -22,14 +18,43 @@ function DisplayStations(){
             console.log(data);
             new L.GeoJSON(data, {
                 onEachFeature: function(feature, layer){
-                    var popup = feature.properties.location;
+                    var popup = "<dd>" + "Location: " + feature.properties.location + "</dd>" +
+                                    "<dd>" + "Security: " + feature.properties.security + "</dd>" +
+                                    "<dd>" + "Type: " + feature.properties.type + "</dd>" +
+                                    "<dd>" + "Number of Stands: " + feature.properties.no_stands + "</dd>";
                     var m = L.marker(feature.geometry.coordinates)
                     .bindPopup( popup );
-                    markerClusters.addLayer( m );
+                    if(highSecurtiy){
+                        console.log("High Secuirty");
+                        if(feature.properties.security === "High" || feature.properties.security === "high"){
+                            markerClusters.addLayer( m );
+                        }
+                    }
+                    else{
+                        markerClusters.addLayer( m );
+                    }
+
                 }
             })
         });
     map.addLayer( markerClusters );
+}
+
+function SettingsReset(){
+    highSecurtiy = false;
+    map.removeLayer(markerClusters);
+}
+
+function SetSecurityHigh(){
+    highSecurtiy = true;
+    map.removeLayer(markerClusters);
+    DisplayStations();
+}
+
+function SetSecurityLow(){
+    highSecurtiy = false;
+    map.removeLayer(markerClusters);
+    DisplayStations();
 }
 
 function Locate(){
@@ -62,11 +87,12 @@ function Create(){
     map.removeLayer(locatedMarker);
 }
 
-function Reset(){
+function MapReset(){
     route = [];
     map.removeLayer(selectedmarker);
     map.removeLayer(locatedMarker);
     map.removeLayer(closestStation);
+    map.removeLayer(markerClusters);
     control.getPlan().setWaypoints([]);
 }
 
@@ -78,16 +104,16 @@ function Route() {
         ],
         show: false,
         routeWhileDragging: false,
-        draggable: false
+        draggable: false,
+        showAlternatives: false,
     }).addTo(map);
     map.removeLayer(markerClusters);
     var shortestDistance = 200.0;
     markerClusters.eachLayer(function(layer){
-        if(layer._latlng.distanceTo(route[1]) < shortestDistance) {
+        if(layer._latlng.distanceTo(route[1]) < shortestDistance ) {
             shortestDistance = layer._latlng.distanceTo(route[1]);
             closestStation = layer;
         }
-            console.log(layer);
     });
     if(closestStation){
        map.addLayer(closestStation);

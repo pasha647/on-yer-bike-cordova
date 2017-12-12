@@ -9,20 +9,94 @@
         <link rel="stylesheet" type="text/css" href="./downloads/leaflet.css">
         <link rel="stylesheet" href="./downloads/leaflet-routing-machine-3.2.7/dist/leaflet-routing-machine.css" />
         <link rel="stylesheet" href="./downloads/Leaflet.markercluster-1.2.0/dist/MarkerCluster.css" />
-         <link rel="stylesheet" href="./downloads/Leaflet.markercluster-1.2.0/dist/MarkerCluster.Default.css" />
+        <link rel="stylesheet" href="./downloads/Leaflet.markercluster-1.2.0/dist/MarkerCluster.Default.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <script src="./downloads/leaflet.js"></script>
         <script src="./downloads/leaflet-routing-machine-3.2.7/dist/leaflet-routing-machine.js"></script>
         <script src="./downloads/Leaflet.markercluster-1.2.0/dist/leaflet.markercluster.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     </head>
     <body>
         <div id="heading">
             <img id="logo" src="./downloads/images/onYerBikeLogo.png"/>
         </div>
+        <div id="dashboard">
+            <button data-toggle="collapse"
+                    data-target="#route"
+                    class="nav"
+                    id="create">Create Route</button>
+            <button data-toggle="collapse"
+                    data-target="#settings"
+                    class="nav"
+                    id="showAll">Settings</button>
+        </div>
+        <div id="route" class="collapse">
+            <div class="panel panel-default">
+                <div class="btn-group-vertical">
+                    <button class="btn btn-primary"
+                            data-toggle="collapse"
+                            data-target="#start">Set Start</button>
+                    <div id="start" class="collapse">
+                        <button type="button"
+                                class="btn btn-primary"
+                                onclick="Locate()">Use current location</button>
+                        <button type="button"
+                                class="btn btn-primary"
+                                onclick="SelectOnMap()">Select on map</button>
+                    </div>
+                    <button type="button" class="btn btn-primary"
+                            id="pan-button1"
+                            data-toggle="collapse"
+                            data-target="#dest">Set Destination</button>
+                    <div id="dest" class="collapse">
+                        <button type="button"
+                                class="btn btn-primary"
+                                onclick="Locate()">Use current location</button>
+                        <button type="button"
+                                class="btn btn-primary"
+                                onclick="SelectOnMap()">Select on map</button>
+                    </div>
+                    <button type="button"
+                            class="btn btn-primary"
+                            onclick="Create()">Create</button>
+                    <button type="button"
+                            class="btn btn-primary"
+                            onclick="MapReset()">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="settings" class="collapse">
+            <div class="panel panel-default">
+                <div class="btn-group-vertical">
+                    <button type="button"
+                            class="btn btn-primary"
+                            onclick="DisplayStations()">Display All Stations</button>
+                    <button type="button" class="btn btn-primary"
+                            data-toggle="collapse"
+                            data-target="#security">Set Security</button>
+                    <div id="security" class="collapse">
+                        <button type="button"
+                                class="btn btn-primary"
+                                onclick="SetSecurityHigh()">High Security</button>
+                        <button type="button"
+                                class="btn btn-primary"
+                                onclick="SetSecurityLow()">Low Security</button>
+                    <button type="button"
+                            class="btn btn-primary"
+                            onclick="SettingsReset()">Reset</button>
+                </div>
+            </div>
+        </div>
+
         <div id="map"></div>
         <script src="./js/index.js"></script>
+        <script>
+            DisplayStations();
+        </script>
     </body>
 
 </html>
