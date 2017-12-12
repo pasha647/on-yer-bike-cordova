@@ -1,0 +1,25 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#heading{
+    height: 100px;
+    width: 100%;
+    background-color: #76A6FC;
+}
+
+#logo{
+    margin-left: auto;
+    margin-right: auto;
+    height: 80px;
+    padding: 10px;
+}
+
+#map{
+    height: 400px;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}

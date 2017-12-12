@@ -1,0 +1,64 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#heading{
+    height: 100px;
+    width: 100%;
+    background-color: #76A6FC;
+}
+
+#logo{
+    margin-left: auto;
+    margin-right: auto;
+    height: 80px;
+    padding: 10px;
+}
+
+.nav{
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 25%;
+}
+
+#create:hover {
+    background-color: #777;
+}
+
+#showAll:hover {
+    background-color: #777;
+}
+
+#reset{
+    color: #555;
+}
+
+#setDest{
+    color: #555;
+}
+
+.panel-default{
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.pan-button1{
+    display: block;
+}
+
+#map{
+    height: 400px;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}

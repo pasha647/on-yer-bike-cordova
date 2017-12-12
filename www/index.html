@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <link rel="stylesheet" type="text/css" href="./css/index.css">
+        <link rel="stylesheet" type="text/css" href="./downloads/leaflet.css">
+        <link rel="stylesheet" href="./downloads/leaflet-routing-machine-3.2.7/dist/leaflet-routing-machine.css" />
+        <link rel="stylesheet" href="./downloads/Leaflet.markercluster-1.2.0/dist/MarkerCluster.css" />
+        <link rel="stylesheet" href="./downloads/Leaflet.markercluster-1.2.0/dist/MarkerCluster.Default.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <script src="./downloads/leaflet.js"></script>
+        <script src="./downloads/leaflet-routing-machine-3.2.7/dist/leaflet-routing-machine.js"></script>
+        <script src="./downloads/Leaflet.markercluster-1.2.0/dist/leaflet.markercluster.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    </head>
+    <body>
+        <div id="heading">
+            <img id="logo" src="./downloads/images/onYerBikeLogo.png"/>
+        </div>
+        <div id="dashboard">
+            <button disabled="true" class="nav" id="setDest">Set Destination</button>
+            <button data-toggle="collapse"
+                    data-target="#route"
+                    class="nav"
+                    id="create">Create Route</button>
+            <button class="nav" id="showAll">Settings</button>
+            <button disabled="true" class="nav" id="reset">Reset</button>
+        </div>
+        <div id="route" class="collapse">
+            <div class="panel panel-default">
+                <button id="pan-button2"
+                        data-toggle="collapse"
+                        data-target="#start">Set Start</button>
+                <div id="start" class="collapse">
+                    <button onclick="Locate()">Use current location</button>
+                    <button>Select on map</button>
+                </div>
+                <button id="pan-button1"
+                        data-toggle="collapse"
+                        data-target="#dest">Set Destination</button>
+                <div id="dest" class="collapse">
+                    <button onclick="Locate()">Use current location</button>
+                    <button onclick="SelectOnMap()">Select on map</button>
+                </div>
+                <button onclick="Create()">Create</button>
+                <button>Reset</button>
+
+            </div>
+        </div>
+        <div id="map"></div>
+        <script src="./js/index.js"></script>
+    </body>
+
+</html>
