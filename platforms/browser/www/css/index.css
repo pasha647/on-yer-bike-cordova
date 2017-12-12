@@ -51,10 +51,6 @@ body {
     text-align: center;
 }
 
-.pan-button1{
-    display: block;
-}
-
 #map{
     height: 400px;
     width: 900px;

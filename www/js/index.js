@@ -6,26 +6,31 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18
 }).addTo(map);
 
-var markerClusters = L.markerClusterGroup();
 
-fetch("http://178.62.121.145/world/stations/")
-    .then((response) => {
-        return response.json();
-    })
-    .then((data) => {
-        console.log(data);
-        new L.GeoJSON(data, {
-            onEachFeature: function(feature, layer){
-                var popup = feature.properties.location;
-                var m = L.marker(feature.geometry.coordinates)
-                .bindPopup( popup );
-                markerClusters.addLayer( m );
-            }
+
+
+
+
+function DisplayStations(){
+    markerClusters = L.markerClusterGroup();
+
+    fetch("http://178.62.121.145/world/stations/")
+        .then((response) => {
+            return response.json();
         })
-    });
-
-map.addLayer( markerClusters );
-
+        .then((data) => {
+            console.log(data);
+            new L.GeoJSON(data, {
+                onEachFeature: function(feature, layer){
+                    var popup = feature.properties.location;
+                    var m = L.marker(feature.geometry.coordinates)
+                    .bindPopup( popup );
+                    markerClusters.addLayer( m );
+                }
+            })
+        });
+    map.addLayer( markerClusters );
+}
 
 function Locate(){
     console.log("locating");
@@ -35,17 +40,17 @@ function Locate(){
 
 function onLocationFound(e){
     console.log("located");
-    L.marker(e.latlng).addTo(map);
+    locatedMarker = L.marker(e.latlng).addTo(map);
     route.push(e.latlng);
 }
 
 function SelectOnMap(){
-    marker = new L.marker(map.getCenter(), {
+    selectedmarker = new L.marker(map.getCenter(), {
         draggable: true
     }).addTo(map);
     alert("Drag and drop the marker to your desired location");
-    marker.on('dragend', function(event){
-        route.push(marker.getLatLng());
+    selectedmarker.on('dragend', function(event){
+        route.push(selectedmarker.getLatLng());
     });
 }
 
@@ -53,12 +58,20 @@ function Create(){
     if(route.length > 1){
         Route();
     }
+    map.removeLayer(selectedmarker);
+    map.removeLayer(locatedMarker);
+}
+
+function Reset(){
+    route = [];
+    map.removeLayer(selectedmarker);
+    map.removeLayer(locatedMarker);
+    map.removeLayer(closestStation);
+    control.getPlan().setWaypoints([]);
 }
 
 function Route() {
-    console.log("routing");
-    console.log(route[0], route[1]);
-    var control = L.Routing.control({
+    control = L.Routing.control({
         waypoints: [
             route[0],
             route[1]
@@ -67,9 +80,7 @@ function Route() {
         routeWhileDragging: false,
         draggable: false
     }).addTo(map);
-
     map.removeLayer(markerClusters);
-    var closestStation;
     var shortestDistance = 200.0;
     markerClusters.eachLayer(function(layer){
         if(layer._latlng.distanceTo(route[1]) < shortestDistance) {
@@ -82,19 +93,5 @@ function Route() {
        map.addLayer(closestStation);
     }
 }
-
-// function onMapClick(e) {
-//     console.log("click");
-//     if(route.length === 0) {
-//         route.push(e.latlng);
-//         var newMarker = new L.marker(e.latlng).addTo(map);
-//         console.log("start: " + route[0]);
-//     }
-//     else if(route.length === 1){
-//         route.push(e.latlng);
-//         console.log("dest: " + route[1]);
-//         Route();
-//     }
-// }
 
 
