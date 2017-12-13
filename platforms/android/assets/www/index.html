@@ -11,12 +11,15 @@
         <link rel="stylesheet" href="./downloads/Leaflet.markercluster-1.2.0/dist/MarkerCluster.css" />
         <link rel="stylesheet" href="./downloads/Leaflet.markercluster-1.2.0/dist/MarkerCluster.Default.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./downloads/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="./downloads/Leaflet.ExtraMarkers-master/src/assets/css/leaflet.extra-markers.css">
 
         <script src="./downloads/leaflet.js"></script>
         <script src="./downloads/leaflet-routing-machine-3.2.7/dist/leaflet-routing-machine.js"></script>
         <script src="./downloads/Leaflet.markercluster-1.2.0/dist/leaflet.markercluster.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="./downloads/Leaflet.ExtraMarkers-master/src/assets/js/leaflet.extra-markers.js"></script>
 
     </head>
     <body>
@@ -34,61 +37,58 @@
                     id="showAll">Settings</button>
         </div>
         <div id="route" class="collapse">
-            <div class="panel panel-default">
-                <div class="btn-group-vertical">
-                    <button class="btn btn-primary"
-                            data-toggle="collapse"
-                            data-target="#start">Set Start</button>
-                    <div id="start" class="collapse">
-                        <button type="button"
-                                class="btn btn-primary"
-                                onclick="Locate()">Use current location</button>
-                        <button type="button"
-                                class="btn btn-primary"
-                                onclick="SelectOnMap()">Select on map</button>
-                    </div>
-                    <button type="button" class="btn btn-primary"
-                            id="pan-button1"
-                            data-toggle="collapse"
-                            data-target="#dest">Set Destination</button>
-                    <div id="dest" class="collapse">
-                        <button type="button"
-                                class="btn btn-primary"
-                                onclick="Locate()">Use current location</button>
-                        <button type="button"
-                                class="btn btn-primary"
-                                onclick="SelectOnMap()">Select on map</button>
-                    </div>
+            <div class="btn-group-vertical">
+                <button class="btn btn-primary"
+                        data-toggle="collapse"
+                        data-target="#start">Set Start</button>
+                <div id="start" class="collapse">
                     <button type="button"
-                            class="btn btn-primary"
-                            onclick="Create()">Create</button>
+                            class="btn btn-primary sub"
+                            onclick="Locate()">Use current location</button>
                     <button type="button"
-                            class="btn btn-primary"
-                            onclick="MapReset()">Reset</button>
+                            class="btn btn-primary sub"
+                            onclick="SelectOnMap()">Select on map</button>
                 </div>
+                <button type="button" class="btn btn-primary"
+                        id="pan-button1"
+                        data-toggle="collapse"
+                        data-target="#dest">Set Destination</button>
+                <div id="dest" class="collapse">
+                    <button type="button"
+                            class="btn btn-primary sub"
+                            onclick="Locate()">Use current location</button>
+                    <button type="button"
+                            class="btn btn-primary sub"
+                            onclick="SelectOnMap()">Select on map</button>
+                </div>
+                <button type="button"
+                        class="btn btn-primary"
+                        onclick="Create()">Create</button>
+                <button type="button"
+                        class="btn btn-primary"
+                        onclick="MapReset()">Reset</button>
             </div>
         </div>
 
         <div id="settings" class="collapse">
-            <div class="panel panel-default">
-                <div class="btn-group-vertical">
+            <div class="btn-group-vertical">
+                <button type="button"
+                        class="btn btn-primary"
+                        onclick="DisplayStations()">Display All Stations</button>
+                <button type="button" class="btn btn-primary"
+                        data-toggle="collapse"
+                        data-target="#security">Set Security</button>
+                <div id="security" class="collapse">
                     <button type="button"
-                            class="btn btn-primary"
-                            onclick="DisplayStations()">Display All Stations</button>
-                    <button type="button" class="btn btn-primary"
-                            data-toggle="collapse"
-                            data-target="#security">Set Security</button>
-                    <div id="security" class="collapse">
-                        <button type="button"
-                                class="btn btn-primary"
-                                onclick="SetSecurityHigh()">High Security</button>
-                        <button type="button"
-                                class="btn btn-primary"
-                                onclick="SetSecurityLow()">Low Security</button>
+                            class="btn btn-primary sub"
+                            onclick="SetSecurityHigh()">High Security</button>
                     <button type="button"
-                            class="btn btn-primary"
-                            onclick="SettingsReset()">Reset</button>
+                            class="btn btn-primary sub"
+                            onclick="SetSecurityLow()">Average Security</button>
                 </div>
+                <button type="button"
+                        class="btn btn-primary"
+                        onclick="SettingsReset()">Reset</button>
             </div>
         </div>
 
